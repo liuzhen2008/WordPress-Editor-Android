@@ -32,7 +32,7 @@ public class SourceViewEditText extends EditText {
     }
 
     public boolean onKeyPreIme(int keyCode, KeyEvent event) {
-        if(event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
             if (this.mOnImeBackListener != null) {
                 this.mOnImeBackListener.onImeBack();
             }

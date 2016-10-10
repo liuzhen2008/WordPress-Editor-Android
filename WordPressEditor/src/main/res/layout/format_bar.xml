@@ -46,6 +46,33 @@
                     android:background="@drawable/format_bar_button_media_selector"/>
 
                 <org.wordpress.android.editor.RippleToggleButton
+                    android:id="@+id/format_bar_button_h1"
+                    style="@style/FormatBarButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:contentDescription="Heading 1"
+                    android:background="@drawable/format_bar_button_media_selector"
+                    android:tag="h1"/>
+
+                <org.wordpress.android.editor.RippleToggleButton
+                    android:id="@+id/format_bar_button_h2"
+                    style="@style/FormatBarButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:contentDescription="Heading 2"
+                    android:background="@drawable/format_bar_button_media_selector"
+                    android:tag="h2"/>
+
+                <org.wordpress.android.editor.RippleToggleButton
+                    android:id="@+id/format_bar_button_h5"
+                    style="@style/FormatBarButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:contentDescription="Heading 5"
+                    android:background="@drawable/format_bar_button_media_selector"
+                    android:tag="h5"/>
+
+                <org.wordpress.android.editor.RippleToggleButton
                     android:id="@+id/format_bar_button_bold"
                     style="@style/FormatBarButton"
                     android:layout_width="wrap_content"

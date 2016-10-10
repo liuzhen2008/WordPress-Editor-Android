@@ -74,8 +74,8 @@ public class EditorFragment extends EditorFragmentAbstract implements View.OnCli
 
     private String mTitle = "";
     private String mContentHtml = "";
-    private boolean mShowHtmlButton = true;
-    private boolean mEditable = false;
+    private boolean mShowHtmlButton = false;
+    private boolean mEditable = true;
 
     private EditorWebViewAbstract mWebView;
     private View mSourceView;
@@ -390,8 +390,14 @@ public class EditorFragment extends EditorFragmentAbstract implements View.OnCli
         ToggleButton ulButton = (ToggleButton) view.findViewById(R.id.format_bar_button_ul);
         mTagToggleButtonMap.put(getString(R.string.format_bar_tag_unorderedList), ulButton);
 
-        ToggleButton olButton = (ToggleButton) view.findViewById(R.id.format_bar_button_ol);
-        mTagToggleButtonMap.put(getString(R.string.format_bar_tag_orderedList), olButton);
+        ToggleButton h1Button = (ToggleButton) view.findViewById(R.id.format_bar_button_h1);
+        mTagToggleButtonMap.put(getString(R.string.format_bar_tag_h1), h1Button);
+
+        ToggleButton h2Button = (ToggleButton) view.findViewById(R.id.format_bar_button_h2);
+        mTagToggleButtonMap.put(getString(R.string.format_bar_tag_h2), h2Button);
+
+        ToggleButton h5Button = (ToggleButton) view.findViewById(R.id.format_bar_button_h5);
+        mTagToggleButtonMap.put(getString(R.string.format_bar_tag_h5), h5Button);
 
         // Tablet-only
         ToggleButton strikethroughButton = (ToggleButton) view.findViewById(R.id.format_bar_button_strikethrough);
@@ -960,7 +966,6 @@ public class EditorFragment extends EditorFragmentAbstract implements View.OnCli
                 mWebView.execJavaScriptFromString("ZSSEditor.getField('zss_field_content').setPlaceholderText('" +
                         Utils.escapeQuotes(mContentPlaceholder) + "');");
 
-
                 updateEditable();
 
                 // Load title and content into ZSSEditor
@@ -1248,9 +1253,26 @@ public class EditorFragment extends EditorFragmentAbstract implements View.OnCli
 
     private void onFormattingButtonClicked(ToggleButton toggleButton) {
         String tag = toggleButton.getTag().toString();
+        String command = null;
         buttonTappedListener(toggleButton);
-        if (mWebView.getVisibility() == View.VISIBLE) {
-            mWebView.execJavaScriptFromString("ZSSEditor.set" + StringUtils.capitalize(tag) + "();");
+        switch (tag) {
+            case "bold":
+            case "italic":
+            case "orderedList":
+            case "unorderedList":
+                command = "ZSSEditor.set" + StringUtils.capitalize(tag) + "();";
+                break;
+            case "h1":
+            case "h2":
+            case "h3":
+            case "h4":
+            case "h5":
+            case "h6":
+                command = "ZSSEditor.setHeading('" + tag + "');";
+                break;
+        }
+        if (mWebView.getVisibility() == View.VISIBLE && command != null) {
+            mWebView.execJavaScriptFromString(command);
         } else {
             applyFormattingHtmlMode(toggleButton, tag);
         }
@@ -1349,7 +1371,7 @@ public class EditorFragment extends EditorFragmentAbstract implements View.OnCli
 
     public void setEditable(boolean isEditing) {
         mEditable = isEditing;
-        if(mWebView != null) {
+        if (mWebView != null) {
             updateEditable();
         }
     }
@@ -1359,7 +1381,7 @@ public class EditorFragment extends EditorFragmentAbstract implements View.OnCli
         mWebView.post(new Runnable() {
             @Override
             public void run() {
-                if(mEditable) {
+                if (mEditable) {
                     mWebView.setFocusableInTouchMode(true);
                     mWebView.setFocusable(true);
                     mWebView.requestFocus();

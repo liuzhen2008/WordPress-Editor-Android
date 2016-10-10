@@ -23,6 +23,9 @@
 
     <string name="format_bar_tag_bold" translatable="false">bold</string>
     <string name="format_bar_tag_italic" translatable="false">italic</string>
+    <string name="format_bar_tag_h1" translatable="false">h1</string>
+    <string name="format_bar_tag_h2" translatable="false">h2</string>
+    <string name="format_bar_tag_h5" translatable="false">h5</string>
     <string name="format_bar_tag_blockquote" translatable="false">blockquote</string>
     <string name="format_bar_tag_unorderedList" translatable="false">unorderedList</string>
     <string name="format_bar_tag_orderedList" translatable="false">orderedList</string>
