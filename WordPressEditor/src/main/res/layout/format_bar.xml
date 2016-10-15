@@ -73,6 +73,15 @@
                     android:tag="h5"/>
 
                 <org.wordpress.android.editor.RippleToggleButton
+                    android:id="@+id/format_bar_button_foreColor"
+                    style="@style/FormatBarButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:contentDescription="foreColor"
+                    android:background="@drawable/format_bar_button_media_selector"
+                    android:tag="foreColor"/>
+
+                <org.wordpress.android.editor.RippleToggleButton
                     android:id="@+id/format_bar_button_bold"
                     style="@style/FormatBarButton"
                     android:layout_width="wrap_content"

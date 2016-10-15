@@ -3,7 +3,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.0'
+        classpath 'com.android.tools.build:gradle:2.2.1'
     }
 }
 
@@ -49,6 +49,7 @@ dependencies {
     compile 'com.android.support:support-v4:23.0.1'
     compile 'com.android.support:design:23.0.1'
     compile 'org.wordpress:utils:1.10.0'
+    compile 'petrov.kristiyan.colorpicker:colorpicker-library:1.1.2'
 
     // Test libraries
     testCompile 'junit:junit:4.11'

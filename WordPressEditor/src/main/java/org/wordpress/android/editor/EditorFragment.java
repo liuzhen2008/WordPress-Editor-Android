@@ -53,6 +53,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import petrov.kristiyan.colorpicker.ColorPicker;
+
 public class EditorFragment extends EditorFragmentAbstract implements View.OnClickListener, View.OnTouchListener,
         OnJsEditorStateChangedListener, OnImeBackListener, EditorWebViewAbstract.AuthHeaderRequestListener {
     private static final String ARG_PARAM_TITLE = "param_title";
@@ -398,6 +400,9 @@ public class EditorFragment extends EditorFragmentAbstract implements View.OnCli
 
         ToggleButton h5Button = (ToggleButton) view.findViewById(R.id.format_bar_button_h5);
         mTagToggleButtonMap.put(getString(R.string.format_bar_tag_h5), h5Button);
+
+        ToggleButton foreColorButton = (ToggleButton) view.findViewById(R.id.format_bar_button_foreColor);
+        mTagToggleButtonMap.put(getString(R.string.format_bar_tag_foreColor), foreColorButton);
 
         // Tablet-only
         ToggleButton strikethroughButton = (ToggleButton) view.findViewById(R.id.format_bar_button_strikethrough);
@@ -1270,6 +1275,22 @@ public class EditorFragment extends EditorFragmentAbstract implements View.OnCli
             case "h6":
                 command = "ZSSEditor.setHeading('" + tag + "');";
                 break;
+            case "foreColor":
+                // launch some color picker??
+                ColorPicker cp = new ColorPicker(this.getActivity());
+                cp.setRoundColorButton(true);
+                cp.setOnFastChooseColorListener(new ColorPicker.OnFastChooseColorListener() {
+                    @Override
+                    public void setOnFastChooseColorListener(int position, int color) {
+                        String hexColor = String.format("#%06X", (0xFFFFFF & color));
+                        mWebView.execJavaScriptFromString("ZSSEditor.setTextColor('" + hexColor + "');");
+                    }
+
+                    @Override
+                    public void onCancel() {}
+                });
+                cp.show();
+                return;
         }
         if (mWebView.getVisibility() == View.VISIBLE && command != null) {
             mWebView.execJavaScriptFromString(command);

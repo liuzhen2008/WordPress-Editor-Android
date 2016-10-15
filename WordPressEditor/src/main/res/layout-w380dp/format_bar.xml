@@ -90,6 +90,21 @@
             android:layout_weight="1"
             android:gravity="center">
             <org.wordpress.android.editor.RippleToggleButton
+                android:id="@+id/format_bar_button_foreColor"
+                style="@style/FormatBarButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:contentDescription="foreColor"
+                android:background="@drawable/format_bar_button_media_selector"
+                android:tag="foreColor"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+            <org.wordpress.android.editor.RippleToggleButton
                 android:id="@+id/format_bar_button_bold"
                 style="@style/FormatBarButton"
                 android:layout_width="wrap_content"

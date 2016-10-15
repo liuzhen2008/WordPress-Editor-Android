@@ -840,9 +840,7 @@ ZSSEditor.setOutdent = function() {
 ZSSEditor.setTextColor = function(color) {
     ZSSEditor.selectWordAroundCursor();
     ZSSEditor.restoreRange();
-	document.execCommand("styleWithCSS", null, true);
 	document.execCommand('foreColor', false, color);
-	document.execCommand("styleWithCSS", null, false);
 	ZSSEditor.sendEnabledStyles();
     // document.execCommand("removeFormat", false, "foreColor"); // Removes just foreColor
 };
@@ -2468,6 +2466,10 @@ ZSSEditor.isCommandEnabled = function(commandName) {
 	return document.queryCommandState(commandName);
 };
 
+ZSSEditor.getCommandValue = function(commandName) {
+    return document.queryCommandValue(commandName);
+};
+
 ZSSEditor.sendEnabledStyles = function(e) {
 
 	var items = [];
@@ -2548,7 +2550,15 @@ ZSSEditor.sendEnabledStyles = function(e) {
         if (formatBlock.length > 0) {
             items.push(formatBlock);
         }
+        var foreColor = ZSSEditor.getCommandValue('foreColor');
+        if (foreColor !== 'rgb(45, 45, 45)') {
+            items.push('foreColor');
+        }
 
+        var fontSize = ZSSEditor.getCommandValue("fontSize");
+        if (fontSize !== '3') {
+            items.push('fontSize:' + fontSize);
+        }
         // Use jQuery to figure out those that are not supported
         if (typeof(e) != "undefined") {
 
